@@ -1,21 +1,21 @@
 local M = {}
 local api = vim.api
 local fn = vim.fn
-local buf_opt = api.nvim_buf_get_option
+local buf_opt = api.nvim_get_option_value
 local strep = string.rep
 local cur_buf = api.nvim_get_current_buf
 local buf_name = api.nvim_buf_get_name
 
 M.txt = function(str, hl)
   str = str or ""
-  local a = "%#Tb" .. hl .. "#" .. str
+  local a = "%#Otb" .. hl .. "#" .. str
   return a
 end
 
 M.btn = function(str, hl, func, arg)
   str = hl and M.txt(str, hl) or str
   arg = arg or ""
-  return "%" .. arg .. "@Tb" .. func .. "@" .. str .. "%X"
+  return "%" .. arg .. "@Otb" .. func .. "@" .. str .. "%X"
 end
 
 local function filename(str)
@@ -27,7 +27,7 @@ local txt = M.txt
 
 local function new_hl(group1, group2)
   local fg = fn.synIDattr(fn.synIDtrans(fn.hlID(group1)), "fg#")
-  local bg = fn.synIDattr(fn.synIDtrans(fn.hlID("Tb" .. group2)), "bg#")
+  local bg = fn.synIDattr(fn.synIDtrans(fn.hlID("Otb" .. group2)), "bg#")
   api.nvim_set_hl(0, group1 .. group2, { fg = fg, bg = bg })
   return "%#" .. group1 .. group2 .. "#"
 end
@@ -75,8 +75,8 @@ M.style_buf = function(nr, i)
   name = btn(name, nil, "GoToBuf", nr)
 
   -- modified bufs icon or close icon
-  local mod = buf_opt(nr, "mod")
-  local cur_mod = buf_opt(0, "mod")
+  local mod = buf_opt("mod", { buf = nr })
+  local cur_mod = buf_opt("mod", { buf = nr })
 
   -- color close btn for focused / hidden  buffers
   if is_curbuf then

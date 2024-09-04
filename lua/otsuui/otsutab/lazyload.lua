@@ -1,6 +1,6 @@
 local opts = require("nvconfig").ui.tabufline
 local api = vim.api
-local buf_opt = api.nvim_buf_get_option
+local buf_opt = api.nvim_get_option_value
 local cur_buf = api.nvim_get_current_buf
 
 -- store listed buffers in tab local var
@@ -29,9 +29,9 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
       -- check for duplicates
       if
         not vim.tbl_contains(bufs, args.buf)
-        and (args.event == "BufEnter" or not is_curbuf or buf_opt(args.buf, "buflisted"))
+        and (args.event == "BufEnter" or not is_curbuf or buf_opt("buflisted", { buf = args.buf }))
         and api.nvim_buf_is_valid(args.buf)
-        and buf_opt(args.buf, "buflisted")
+        and buf_opt("buflisted", { buf = args.buf })
       then
         table.insert(bufs, args.buf)
       end
@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
 
     -- remove unnamed buffer which isnt current buf & modified
     if args.event == "BufAdd" then
-      if #api.nvim_buf_get_name(bufs[1]) == 0 and not buf_opt(bufs[1], "modified") then
+      if #api.nvim_buf_get_name(bufs[1]) == 0 and not buf_opt("modified", { buf = bufs[1] }) then
         table.remove(bufs, 1)
       end
     end
@@ -75,16 +75,16 @@ vim.api.nvim_create_autocmd("BufDelete", {
 if opts.lazyload then
   vim.api.nvim_create_autocmd({ "BufNew", "BufNewFile", "BufRead", "TabEnter", "TermOpen" }, {
     pattern = "*",
-    group = vim.api.nvim_create_augroup("TabuflineLazyLoad", {}),
+    group = vim.api.nvim_create_augroup("OtsuTabLazyLoad", {}),
     callback = function()
       if #vim.fn.getbufinfo { buflisted = 1 } >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
         vim.opt.showtabline = 2
-        vim.opt.tabline = "%!v:lua.require('otsu.tabufline.modules')()"
-        vim.api.nvim_del_augroup_by_name "TabuflineLazyLoad"
+        vim.opt.tabline = "%!v:lua.require('otsuui.otsutab.modules')()"
+        vim.api.nvim_del_augroup_by_name "OtsuTabLazyLoad"
       end
     end,
   })
 else
   vim.opt.showtabline = 2
-  vim.opt.tabline = "%!v:lua.require('otsu.tabufline.modules')()"
+  vim.opt.tabline = "%!v:lua.require('otsuui.otsutab.modules')()"
 end

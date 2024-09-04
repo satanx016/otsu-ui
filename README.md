@@ -1,3 +1,1 @@
-# otsu-ui
-
-Cool Utility
+# Otsuvim's UI plugin
