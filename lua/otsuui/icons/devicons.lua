@@ -29,6 +29,30 @@ return {
 		name = "Dockerfile",
 	},
 
+	git = {
+		icon = "󰊢",
+		color = "#F14C28",
+		name = "GitLogo",
+	},
+
+	[".gitattributes"] = {
+		icon = "󰊢",
+		color = "#f54d27",
+		name = "GitAttributes",
+	},
+
+	[".gitignore"] = {
+		icon = "󰊢",
+		color = "#f54d27",
+		name = "GitIgnore",
+	},
+
+	[".gitmodules"] = {
+		icon = "󰊢",
+		color = "#f54d27",
+		name = "GitModules",
+	},
+
 	html = {
 		icon = "",
 		name = "html",
