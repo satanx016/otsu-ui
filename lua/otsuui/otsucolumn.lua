@@ -75,7 +75,7 @@ function M.statuscolumn()
 
 	local components = { "", "", "" } -- left, middle, right
 
-	local show_open_folds = true
+	local show_open_folds = false
 	local use_githl = true
 
 	if show_signs then
