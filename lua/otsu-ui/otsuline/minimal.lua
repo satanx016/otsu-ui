@@ -1,6 +1,6 @@
 local config = require("nvconfig").ui.statusline
 local sep_style = config.separator_style
-local utils = require("otsuui.otsuline.utils")
+local utils = require("otsu-ui.otsuline.utils")
 
 sep_style = (sep_style ~= "round" and sep_style ~= "block") and "block" or sep_style
 

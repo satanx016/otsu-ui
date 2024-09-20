@@ -79,12 +79,12 @@ if opts.lazyload then
     callback = function()
       if #vim.fn.getbufinfo { buflisted = 1 } >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
         vim.opt.showtabline = 2
-        vim.opt.tabline = "%!v:lua.require('otsuui.otsutab.modules')()"
+        vim.opt.tabline = "%!v:lua.require('otsu-ui.otsutab.modules')()"
         vim.api.nvim_del_augroup_by_name "OtsuTabLazyLoad"
       end
     end,
   })
 else
   vim.opt.showtabline = 2
-  vim.opt.tabline = "%!v:lua.require('otsuui.otsutab.modules')()"
+  vim.opt.tabline = "%!v:lua.require('otsu-ui.otsutab.modules')()"
 end

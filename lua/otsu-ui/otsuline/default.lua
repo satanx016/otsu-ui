@@ -1,6 +1,6 @@
 local config = require("nvconfig").ui.statusline
 local sep_style = config.separator_style
-local utils = require("otsuui.otsuline.utils")
+local utils = require("otsu-ui.otsuline.utils")
 
 local default_sep_icons = {
 	default = { left = "", right = "" },

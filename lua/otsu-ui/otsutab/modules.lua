@@ -4,10 +4,10 @@ local g = vim.g
 
 dofile(vim.g.based_cache .. "otsutab")
 
-local txt = require("otsuui.otsutab.utils").txt
-local btn = require("otsuui.otsutab.utils").btn
+local txt = require("otsu-ui.otsutab.utils").txt
+local btn = require("otsu-ui.otsutab.utils").btn
 local strep = string.rep
-local style_buf = require("otsuui.otsutab.utils").style_buf
+local style_buf = require("otsu-ui.otsutab.utils").style_buf
 local cur_buf = api.nvim_get_current_buf
 local config = require("nvconfig").ui.tabufline
 
@@ -17,7 +17,7 @@ vim.cmd("function! OtbGoToBuf(bufnr,b,c,d) \n execute 'b'..a:bufnr \n endfunctio
 
 vim.cmd([[
    function! OtbKillBuf(bufnr,b,c,d) 
-        call luaeval('require("otsuui.otsutab").close_buffer(_A)', a:bufnr)
+        call luaeval('require("otsu-ui.otsutab").close_buffer(_A)', a:bufnr)
   endfunction]])
 
 vim.cmd("function! OtbNewTab(a,b,c,d) \n tabnew \n endfunction")
