@@ -2,23 +2,23 @@ local M = {}
 
 local config = require("nvconfig").ui
 
-M.setup = function()
+function M.setup()
 	M.otsuline()
 	M.otsutab()
 	M.otsucolumn()
 end
 
-M.otsuline = function()
+function M.otsuline()
 	vim.opt.statusline = "%!v:lua.require('otsu-ui.otsuline." .. config.statusline.theme .. "')()"
 end
 
-M.otsutab = function()
+function M.otsutab()
 	if config.tabufline.enabled then
 		require("otsu-ui.otsutab.lazyload")
 	end
 end
 
-M.otsucolumn = function()
+function M.otsucolumn()
 	vim.opt.statuscolumn = [[%!v:lua.require'otsu-ui.otsucolumn'.statuscolumn()]]
 
 	vim.opt.foldmethod = "expr"
