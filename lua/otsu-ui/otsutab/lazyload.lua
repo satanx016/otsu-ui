@@ -1,7 +1,6 @@
 local opts = require("nvconfig").ui.tabufline
-local api = vim.api
-local buf_opt = api.nvim_get_option_value
-local cur_buf = api.nvim_get_current_buf
+local buf_opt = vim.api.nvim_get_option_value
+local cur_buf = vim.api.nvim_get_current_buf
 
 -- store listed buffers in tab local var
 vim.t.bufs = vim.api.nvim_list_bufs()
@@ -30,7 +29,7 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
       if
         not vim.tbl_contains(bufs, args.buf)
         and (args.event == "BufEnter" or not is_curbuf or buf_opt("buflisted", { buf = args.buf }))
-        and api.nvim_buf_is_valid(args.buf)
+        and vim.api.nvim_buf_is_valid(args.buf)
         and buf_opt("buflisted", { buf = args.buf })
       then
         table.insert(bufs, args.buf)
@@ -39,7 +38,7 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
 
     -- remove unnamed buffer which isnt current buf & modified
     if args.event == "BufAdd" then
-      if #api.nvim_buf_get_name(bufs[1]) == 0 and not buf_opt("modified", { buf = bufs[1] }) then
+      if #vim.api.nvim_buf_get_name(bufs[1]) == 0 and not buf_opt("modified", { buf = bufs[1] }) then
         table.remove(bufs, 1)
       end
     end

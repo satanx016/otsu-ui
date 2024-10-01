@@ -1,10 +1,9 @@
 local M = {}
-local api = vim.api
 local fn = vim.fn
-local buf_opt = api.nvim_get_option_value
+local buf_opt = vim.api.nvim_get_option_value
 local strep = string.rep
-local cur_buf = api.nvim_get_current_buf
-local buf_name = api.nvim_buf_get_name
+local cur_buf = vim.api.nvim_get_current_buf
+local buf_name = vim.api.nvim_buf_get_name
 
 M.txt = function(str, hl)
   str = str or ""
@@ -28,7 +27,7 @@ local txt = M.txt
 local function new_hl(group1, group2)
   local fg = fn.synIDattr(fn.synIDtrans(fn.hlID(group1)), "fg#")
   local bg = fn.synIDattr(fn.synIDtrans(fn.hlID("Otb" .. group2)), "bg#")
-  api.nvim_set_hl(0, group1 .. group2, { fg = fg, bg = bg })
+  vim.api.nvim_set_hl(0, group1 .. group2, { fg = fg, bg = bg })
   return "%#" .. group1 .. group2 .. "#"
 end
 

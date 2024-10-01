@@ -1,7 +1,7 @@
 local M = {}
-local api = vim.api
-local cur_buf = api.nvim_get_current_buf
-local set_buf = api.nvim_set_current_buf
+local cur_buf = vim.api.nvim_get_current_buf
+local set_buf = vim.api.nvim_set_current_buf
+
 
 local function buf_index(bufnr)
   for i, value in ipairs(vim.t.bufs) do
