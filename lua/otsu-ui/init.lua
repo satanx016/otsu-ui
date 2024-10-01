@@ -1,38 +1,37 @@
 local M = {}
 
-local config = require("nvconfig").ui
-
 function M.setup()
-	M.otsuline()
-	M.otsutab()
-	M.otsucolumn()
+  require("otsu-ui.otsucolumn").load()
+	require("otsu-ui.otsuline").load()
+  require("otsu-ui.otsutab").lazyload()
+
+	M.reload_conf_on_save()
+	M.highlight_on_yank()
 end
 
-function M.otsuline()
-	vim.opt.statusline = "%!v:lua.require('otsu-ui.otsuline." .. config.statusline.theme .. "')()"
+function M.highlight_on_yank()
+	vim.api.nvim_create_autocmd("TextYankPost", {
+		callback = function()
+			vim.highlight.on_yank({ higroup = "MatchWord" })
+		end,
+	})
 end
 
-function M.otsutab()
-	if config.tabufline.enabled then
-		require("otsu-ui.otsutab.lazyload")
-	end
-end
+function M.reload_conf_on_save()
+	vim.api.nvim_create_autocmd("BufWritePost", {
+		pattern = vim.fn.stdpath("config") .. "/lua/nvconfig.lua",
+		group = vim.api.nvim_create_augroup("ReloadOtsu", {}),
+		callback = function()
+			require("plenary.reload").reload_module("nvconfig")
+			require("plenary.reload").reload_module("based")
 
-function M.otsucolumn()
-	vim.opt.statuscolumn = [[%!v:lua.require'otsu-ui.otsucolumn'.statuscolumn()]]
+			-- refresh ui modules
+			require("otsu-ui.otsuline").load()
+			require("otsu-ui.otsutab").load()
 
-	vim.opt.foldmethod = "expr"
-	vim.opt.foldtext = ""
-	vim.opt.foldlevel = 99
-	vim.opt.fillchars = {
-		foldopen = "",
-		foldclose = "",
-		fold = " ",
-		foldsep = " ",
-		diff = "╱",
-		eob = " ",
-	}
-	vim.opt.foldexpr = "v:lua.require'otsu-ui.otsucolumn'.foldexpr()"
+			require("based").load_all_highlights()
+		end,
+	})
 end
 
 return M

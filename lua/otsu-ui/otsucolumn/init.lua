@@ -1,5 +1,22 @@
 local M = {}
 
+function M.load()
+	vim.opt.statuscolumn = [[%!v:lua.require'otsu-ui.otsucolumn'.statuscolumn()]]
+
+	vim.opt.foldmethod = "expr"
+	vim.opt.foldtext = ""
+	vim.opt.foldlevel = 99
+	vim.opt.fillchars = {
+		foldopen = "",
+		foldclose = "",
+		fold = " ",
+		foldsep = " ",
+		diff = "╱",
+		eob = " ",
+	}
+	vim.opt.foldexpr = "v:lua.require'otsu-ui.otsucolumn'.foldexpr()"
+end
+
 function M.get_signs(buf, lnum)
 	-- Get regular signs
 	local signs = {}

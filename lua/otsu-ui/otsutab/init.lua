@@ -2,6 +2,16 @@ local M = {}
 local cur_buf = vim.api.nvim_get_current_buf
 local set_buf = vim.api.nvim_set_current_buf
 
+function M.lazyload()
+  local config = require("nvconfig")
+	if config.ui.tabufline.enabled then
+		require("otsu-ui.otsutab.lazyload")
+	end
+end
+
+function M.load()
+	vim.opt.tabline = "%!v:lua.require('otsu-ui.otsutab.modules')()"
+end
 
 local function buf_index(bufnr)
   for i, value in ipairs(vim.t.bufs) do
