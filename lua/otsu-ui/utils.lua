@@ -18,8 +18,8 @@ M.list_themes = function()
 	return default_themes
 end
 
-M.replace_word = function(old, new)
-	local otsurc = vim.fn.stdpath("config") .. "/lua/" .. "otsurc.lua"
+M.replace_key_value = function(old, new)
+	local otsurc = vim.uv.fs_realpath(vim.fn.stdpath("config") .. "/lua/otsuvim/config/otsurc.lua")
 	local file = io.open(otsurc, "r")
 	local added_pattern = string.gsub(old, "-", "%%-") -- add % before - if exists
 	local new_content = file:read("*all"):gsub(added_pattern, new)
