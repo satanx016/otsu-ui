@@ -1,9 +1,9 @@
 local M = {}
 
 function M.setup()
-  require("otsu-ui.otsucolumn").load()
+	require("otsu-ui.otsucolumn").load()
 	require("otsu-ui.otsuline").load()
-  require("otsu-ui.otsutab").lazyload()
+	require("otsu-ui.otsutab").lazyload()
 
 	M.reload_conf_on_save()
 	M.highlight_on_yank()
