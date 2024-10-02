@@ -1,8 +1,7 @@
 local M = {}
 
 function M.load()
-	local config = require("nvconfig")
-	vim.opt.statusline = "%!v:lua.require('otsu-ui.otsuline." .. config.ui.statusline.theme .. "')()"
+	vim.opt.statusline = "%!v:lua.require('otsu-ui.otsuline." .. Otsuvim.config.ui.statusline.theme .. "')()"
 
 	vim.api.nvim_create_autocmd("LspProgress", {
 		group = vim.api.nvim_create_augroup("OtsulineRedraw", {}),

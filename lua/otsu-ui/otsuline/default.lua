@@ -1,4 +1,4 @@
-local sep_style = require("nvconfig").ui.statusline.separator_style
+local sep_style = Otsuvim.config.ui.statusline.separator_style
 local utils = require("otsu-ui.otsuline.utils")
 
 local default_sep_icons = {

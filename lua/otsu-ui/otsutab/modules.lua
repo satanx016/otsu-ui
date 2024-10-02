@@ -5,7 +5,7 @@ local btn = require("otsu-ui.otsutab.utils").btn
 local strep = string.rep
 local style_buf = require("otsu-ui.otsutab.utils").style_buf
 local cur_buf = vim.api.nvim_get_current_buf
-local config = require("nvconfig").ui.tabufline
+local config = Otsuvim.config.ui.tabufline
 
 ---------------------------------------------------------- btn onclick functions ----------------------------------------------
 

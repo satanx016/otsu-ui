@@ -19,16 +19,14 @@ end
 
 function M.reload_conf_on_save()
 	vim.api.nvim_create_autocmd("BufWritePost", {
-		pattern = vim.uv.fs_realpath(vim.fn.stdpath("config") .. "/lua/nvconfig.lua"),
+		pattern = vim.uv.fs_realpath(vim.fn.stdpath("config") .. "/lua/otsuvim/config/otsurc.lua"),
 		group = vim.api.nvim_create_augroup("ReloadOtsu", {}),
 		callback = function()
-			require("plenary.reload").reload_module("nvconfig")
+			-- reload otsurc
+			require("plenary.reload").reload_module("otsuvim.config.otsurc")
+			Otsuvim.config = require("otsuvim.config.otsurc")
+
 			require("plenary.reload").reload_module("based")
-
-			-- refresh ui modules
-			require("otsu-ui.otsuline").load()
-			require("otsu-ui.otsutab").load()
-
 			require("based").load_all_highlights()
 		end,
 	})

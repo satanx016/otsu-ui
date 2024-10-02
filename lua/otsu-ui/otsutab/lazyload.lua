@@ -1,4 +1,4 @@
-local opts = require("nvconfig").ui.tabufline
+local opts = Otsuvim.config.ui.tabufline
 local buf_opt = vim.api.nvim_get_option_value
 local cur_buf = vim.api.nvim_get_current_buf
 

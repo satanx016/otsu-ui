@@ -14,7 +14,7 @@ local orders = {
 }
 
 M.generate = function(theme, modules)
-	local config = require("nvconfig").ui.statusline
+	local config = Otsuvim.config.ui.statusline
 	local order = config.order or orders[theme]
 	local result = {}
 
