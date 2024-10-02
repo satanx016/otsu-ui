@@ -19,7 +19,7 @@ end
 
 function M.reload_conf_on_save()
 	vim.api.nvim_create_autocmd("BufWritePost", {
-		pattern = vim.fn.stdpath("config") .. "/lua/nvconfig.lua",
+		pattern = vim.uv.fs_realpath(vim.fn.stdpath("config") .. "/lua/nvconfig.lua"),
 		group = vim.api.nvim_create_augroup("ReloadOtsu", {}),
 		callback = function()
 			require("plenary.reload").reload_module("nvconfig")
