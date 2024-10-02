@@ -24,3 +24,10 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 		end
 	end,
 })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = augroup("highlight_yank"),
+	callback = function()
+		vim.highlight.on_yank({ higroup = "MatchWord" })
+	end,
+})
