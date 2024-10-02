@@ -1,5 +1,4 @@
 local M = {}
-local fn = vim.fn
 local buf_opt = vim.api.nvim_get_option_value
 local strep = string.rep
 local cur_buf = vim.api.nvim_get_current_buf
@@ -25,8 +24,8 @@ local btn = M.btn
 local txt = M.txt
 
 local function new_hl(group1, group2)
-	local fg = fn.synIDattr(fn.synIDtrans(fn.hlID(group1)), "fg#")
-	local bg = fn.synIDattr(fn.synIDtrans(fn.hlID("Otb" .. group2)), "bg#")
+	local fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group1)), "fg#")
+	local bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Otb" .. group2)), "bg#")
 	vim.api.nvim_set_hl(0, group1 .. group2, { fg = fg, bg = bg })
 	return "%#" .. group1 .. group2 .. "#"
 end
@@ -34,7 +33,7 @@ end
 local function gen_unique_name(oldname, index)
 	for i2, nr2 in ipairs(vim.t.bufs) do
 		if index ~= i2 and filename(buf_name(nr2)) == oldname then
-			return fn.fnamemodify(buf_name(vim.t.bufs[index]), ":p:.")
+			return vim.fn.fnamemodify(buf_name(vim.t.bufs[index]), ":p:.")
 		end
 	end
 end
