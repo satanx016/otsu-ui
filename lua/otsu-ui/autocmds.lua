@@ -1,5 +1,5 @@
 local function augroup(name)
-	return vim.api.nvim_create_augroup("otsuvim_" .. name, {})
+	return vim.api.nvim_create_augroup("otsu-ui_" .. name, {})
 end
 
 vim.api.nvim_create_autocmd("BufWritePost", {

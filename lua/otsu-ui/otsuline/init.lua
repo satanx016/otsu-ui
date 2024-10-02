@@ -4,7 +4,7 @@ function M.load()
 	vim.opt.statusline = "%!v:lua.require('otsu-ui.otsuline." .. Otsuvim.config.ui.statusline.theme .. "')()"
 
 	vim.api.nvim_create_autocmd("LspProgress", {
-		group = vim.api.nvim_create_augroup("OtsulineRedraw", {}),
+		group = vim.api.nvim_create_augroup("otsu-ui_otsuline_redraw", {}),
 		callback = function(args)
 			if string.find(args.match, "end") then
 				vim.cmd("redrawstatus")
