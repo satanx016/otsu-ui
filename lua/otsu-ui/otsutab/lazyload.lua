@@ -87,3 +87,10 @@ else
   vim.opt.showtabline = 2
   vim.opt.tabline = "%!v:lua.require('otsu-ui.otsutab.modules')()"
 end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.opt_local.buflisted = false
+  end,
+})
