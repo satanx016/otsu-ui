@@ -17,9 +17,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	group = augroup("vsplit_help&man"),
-	pattern = { "*.txt", "*(*)" },
+	pattern = { "*.txt", "*(*)", "*.norg" },
 	callback = function()
-		if vim.bo.filetype == "help" or vim.bo.filetype == "man" then
+		if vim.bo.buftype == "help" or vim.bo.filetype == "man" then
 			vim.cmd("wincmd L")
 		end
 	end,
