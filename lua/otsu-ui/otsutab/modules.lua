@@ -23,87 +23,87 @@ vim.cmd("function! OtbToggleTabs(a,b,c,d) \n let g:OtbTabsToggled = !g:OtbTabsTo
 -------------------------------------------------------- functions ------------------------------------------------------------
 
 local function getNvimTreeWidth()
-	for _, win in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-		if vim.bo[vim.api.nvim_win_get_buf(win)].ft == "NvimTree" then
-			return vim.api.nvim_win_get_width(win) + 1
-		end
-	end
-	return 0
+  for _, win in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if vim.bo[vim.api.nvim_win_get_buf(win)].ft == "NvimTree" then
+      return vim.api.nvim_win_get_width(win) + 1
+    end
+  end
+  return 0
 end
 
 ------------------------------------- modules -----------------------------------------
 local M = {}
 
 local function available_space()
-	local str = ""
+  local str = ""
 
-	for _, key in ipairs(config.order) do
-		if key ~= "buffers" then
-			str = str .. M[key]()
-		end
-	end
+  for _, key in ipairs(config.order) do
+    if key ~= "buffers" then
+      str = str .. M[key]()
+    end
+  end
 
-	local modules = vim.api.nvim_eval_statusline(str, { use_tabline = true })
-	return vim.o.columns - modules.width
+  local modules = vim.api.nvim_eval_statusline(str, { use_tabline = true })
+  return vim.o.columns - modules.width
 end
 
 M.treeOffset = function()
-	return "%#NvimTreeNormal#" .. strep(" ", getNvimTreeWidth())
+  return "%#NvimTreeNormal#" .. strep(" ", getNvimTreeWidth())
 end
 
 M.buffers = function()
-	local buffers = {}
-	local has_current = false -- have we seen current buffer yet?
+  local buffers = {}
+  local has_current = false -- have we seen current buffer yet?
 
-	for i, nr in ipairs(vim.t.bufs) do
-		if ((#buffers + 1) * 23) > available_space() then
-			if has_current then
-				break
-			end
+  for i, nr in ipairs(vim.t.bufs) do
+    if ((#buffers + 1) * 23) > available_space() then
+      if has_current then
+        break
+      end
 
-			table.remove(buffers, 1)
-		end
+      table.remove(buffers, 1)
+    end
 
-		has_current = cur_buf() == nr or has_current
-		table.insert(buffers, style_buf(nr, i))
-	end
+    has_current = cur_buf() == nr or has_current
+    table.insert(buffers, style_buf(nr, i))
+  end
 
-	return table.concat(buffers) .. txt("%=", "Fill") -- buffers + empty space
+  return table.concat(buffers) .. txt("%=", "Fill") -- buffers + empty space
 end
 
 vim.g.OtbTabsToggled = 0
 
 M.tabs = function()
-	local result, tabs = "", vim.fn.tabpagenr("$")
+  local result, tabs = "", vim.fn.tabpagenr("$")
 
-	if tabs > 1 then
-		for nr = 1, tabs, 1 do
-			local tab_hl = "TabO" .. (nr == vim.fn.tabpagenr() and "n" or "ff")
-			result = result .. btn(" " .. nr .. " ", tab_hl, "GotoTab", nr)
-		end
+  if tabs > 1 then
+    for nr = 1, tabs, 1 do
+      local tab_hl = "TabO" .. (nr == vim.fn.tabpagenr() and "n" or "ff")
+      result = result .. btn(" " .. nr .. " ", tab_hl, "GotoTab", nr)
+    end
 
-		local new_tabtn = btn("  ", "TabNewBtn", "NewTab")
-		local tabstoggleBtn = btn(" 󰅂 ", "TabTitle", "ToggleTabs")
-		local small_btn = btn(" 󰅁 ", "TabTitle", "ToggleTabs")
+    local new_tabtn = btn("  ", "TabNewBtn", "NewTab")
+    local tabstoggleBtn = btn(" 󰅂 ", "TabTitle", "ToggleTabs")
+    local small_btn = btn(" 󰅁 ", "TabTitle", "ToggleTabs")
 
-		return vim.g.OtbTabsToggled == 1 and small_btn or new_tabtn .. tabstoggleBtn .. result
-	end
+    return vim.g.OtbTabsToggled == 1 and small_btn or new_tabtn .. tabstoggleBtn .. result
+  end
 
-	return ""
+  return ""
 end
 
 return function()
-	local result = {}
+  local result = {}
 
-	if config.modules then
-		for key, value in pairs(config.modules) do
-			M[key] = value
-		end
-	end
+  if config.modules then
+    for key, value in pairs(config.modules) do
+      M[key] = value
+    end
+  end
 
-	for _, v in ipairs(config.order) do
-		table.insert(result, M[v]())
-	end
+  for _, v in ipairs(config.order) do
+    table.insert(result, M[v]())
+  end
 
-	return table.concat(result)
+  return table.concat(result)
 end

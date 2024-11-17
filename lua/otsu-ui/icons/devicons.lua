@@ -1,170 +1,170 @@
 return {
-	default_icon = {
-		icon = "󰈚",
-		name = "Default",
-	},
+  default_icon = {
+    icon = "󰈚",
+    name = "Default",
+  },
 
-	c = {
-		icon = "",
-		name = "c",
-	},
+  c = {
+    icon = "",
+    name = "c",
+  },
 
-	css = {
-		icon = "",
-		name = "css",
-	},
+  css = {
+    icon = "",
+    name = "css",
+  },
 
-	dart = {
-		icon = "",
-		name = "dart",
-	},
+  dart = {
+    icon = "",
+    name = "dart",
+  },
 
-	deb = {
-		icon = "",
-		name = "deb",
-	},
+  deb = {
+    icon = "",
+    name = "deb",
+  },
 
-	Dockerfile = {
-		icon = "",
-		name = "Dockerfile",
-	},
+  Dockerfile = {
+    icon = "",
+    name = "Dockerfile",
+  },
 
-	git = {
-		icon = "󰊢",
-		color = "#F14C28",
-		name = "GitLogo",
-	},
+  git = {
+    icon = "󰊢",
+    color = "#F14C28",
+    name = "GitLogo",
+  },
 
-	[".gitattributes"] = {
-		icon = "󰊢",
-		color = "#f54d27",
-		name = "GitAttributes",
-	},
+  [".gitattributes"] = {
+    icon = "󰊢",
+    color = "#f54d27",
+    name = "GitAttributes",
+  },
 
-	[".gitignore"] = {
-		icon = "󰊢",
-		color = "#f54d27",
-		name = "GitIgnore",
-	},
+  [".gitignore"] = {
+    icon = "󰊢",
+    color = "#f54d27",
+    name = "GitIgnore",
+  },
 
-	[".gitmodules"] = {
-		icon = "󰊢",
-		color = "#f54d27",
-		name = "GitModules",
-	},
+  [".gitmodules"] = {
+    icon = "󰊢",
+    color = "#f54d27",
+    name = "GitModules",
+  },
 
-	html = {
-		icon = "",
-		name = "html",
-	},
+  html = {
+    icon = "",
+    name = "html",
+  },
 
-	jpeg = {
-		icon = "󰉏",
-		name = "jpeg",
-	},
+  jpeg = {
+    icon = "󰉏",
+    name = "jpeg",
+  },
 
-	jpg = {
-		icon = "󰉏",
-		name = "jpg",
-	},
+  jpg = {
+    icon = "󰉏",
+    name = "jpg",
+  },
 
-	js = {
-		icon = "󰌞",
-		name = "js",
-	},
+  js = {
+    icon = "󰌞",
+    name = "js",
+  },
 
-	kt = {
-		icon = "󱈙",
-		name = "kt",
-	},
+  kt = {
+    icon = "󱈙",
+    name = "kt",
+  },
 
-	lock = {
-		icon = "󰌾",
-		name = "lock",
-	},
+  lock = {
+    icon = "󰌾",
+    name = "lock",
+  },
 
-	lua = {
-		icon = "",
-		name = "lua",
-	},
+  lua = {
+    icon = "",
+    name = "lua",
+  },
 
-	mp3 = {
-		icon = "󰎆",
-		name = "mp3",
-	},
+  mp3 = {
+    icon = "󰎆",
+    name = "mp3",
+  },
 
-	mp4 = {
-		icon = "",
-		name = "mp4",
-	},
+  mp4 = {
+    icon = "",
+    name = "mp4",
+  },
 
-	out = {
-		icon = "",
-		name = "out",
-	},
+  out = {
+    icon = "",
+    name = "out",
+  },
 
-	png = {
-		icon = "󰉏",
-		name = "png",
-	},
+  png = {
+    icon = "󰉏",
+    name = "png",
+  },
 
-	py = {
-		icon = "",
-		name = "py",
-	},
+  py = {
+    icon = "",
+    name = "py",
+  },
 
-	["robots.txt"] = {
-		icon = "󰚩",
-		name = "robots",
-	},
+  ["robots.txt"] = {
+    icon = "󰚩",
+    name = "robots",
+  },
 
-	toml = {
-		icon = "",
-		name = "toml",
-	},
+  toml = {
+    icon = "",
+    name = "toml",
+  },
 
-	ts = {
-		icon = "󰛦",
-		name = "ts",
-	},
+  ts = {
+    icon = "󰛦",
+    name = "ts",
+  },
 
-	ttf = {
-		icon = "",
-		name = "TrueTypeFont",
-	},
+  ttf = {
+    icon = "",
+    name = "TrueTypeFont",
+  },
 
-	rb = {
-		icon = "",
-		name = "rb",
-	},
+  rb = {
+    icon = "",
+    name = "rb",
+  },
 
-	rpm = {
-		icon = "",
-		name = "rpm",
-	},
+  rpm = {
+    icon = "",
+    name = "rpm",
+  },
 
-	vue = {
-		icon = "󰡄",
-		name = "vue",
-	},
+  vue = {
+    icon = "󰡄",
+    name = "vue",
+  },
 
-	woff = {
-		icon = "",
-		name = "WebOpenFontFormat",
-	},
+  woff = {
+    icon = "",
+    name = "WebOpenFontFormat",
+  },
 
-	woff2 = {
-		icon = "",
-		name = "WebOpenFontFormat2",
-	},
+  woff2 = {
+    icon = "",
+    name = "WebOpenFontFormat2",
+  },
 
-	xz = {
-		icon = "",
-		name = "xz",
-	},
+  xz = {
+    icon = "",
+    name = "xz",
+  },
 
-	zip = {
-		icon = "",
-		name = "zip",
-	},
+  zip = {
+    icon = "",
+    name = "zip",
+  },
 }
