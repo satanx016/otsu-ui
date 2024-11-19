@@ -6,9 +6,10 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   group = augroup("reload"),
   pattern = vim.uv.fs_realpath(vim.fn.stdpath("config") .. "/lua/otsuvim/config/otsurc.lua"),
   callback = function()
-    -- reload otsurc
     require("plenary.reload").reload_module("otsuvim.config.otsurc")
     Otsuvim.config = require("otsuvim.config.otsurc")
+
+    vim.opt.statusline = "%!v:lua.require('otsu-ui.otsuline." .. Otsuvim.config.ui.statusline.theme .. "')()"
 
     require("plenary.reload").reload_module("based")
     require("based").load_all_highlights()
