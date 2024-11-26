@@ -1,9 +1,9 @@
 local M = {}
 
 function M.setup()
-  require("otsu-ui.otsucolumn").load()
-  require("otsu-ui.otsuline").load()
-  require("otsu-ui.otsutab").lazyload()
+  require("otsu-ui.statuscolumn").load()
+  require("otsu-ui.statusline").load()
+  require("otsu-ui.tufline").lazyload()
 
   require("otsu-ui.autocmds")
 end

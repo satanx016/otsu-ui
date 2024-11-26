@@ -1,4 +1,4 @@
-local utils = require("otsu-ui.otsuline.utils")
+local utils = require("otsu-ui.statusline.utils")
 
 local M = {}
 

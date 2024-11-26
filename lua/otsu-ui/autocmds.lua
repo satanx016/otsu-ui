@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     require("plenary.reload").reload_module("otsuvim.config.otsurc")
     Otsuvim.config = require("otsuvim.config.otsurc")
 
-    vim.opt.statusline = "%!v:lua.require('otsu-ui.otsuline." .. Otsuvim.config.ui.statusline.theme .. "')()"
+    vim.opt.statusline = "%!v:lua.require('otsu-ui.statusline." .. Otsuvim.config.ui.statusline.theme .. "')()"
 
     require("plenary.reload").reload_module("based")
     require("based").load_all_highlights()

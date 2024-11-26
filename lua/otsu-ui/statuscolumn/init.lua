@@ -1,7 +1,7 @@
 local M = {}
 
 function M.load()
-  vim.opt.statuscolumn = [[%!v:lua.require'otsu-ui.otsucolumn'.statuscolumn()]]
+  vim.opt.statuscolumn = [[%!v:lua.require'otsu-ui.statuscolumn'.statuscolumn()]]
 
   vim.opt.foldmethod = "expr"
   vim.opt.foldtext = ""
@@ -14,7 +14,7 @@ function M.load()
     diff = "╱",
     eob = " ",
   }
-  vim.opt.foldexpr = "v:lua.require'otsu-ui.otsucolumn'.foldexpr()"
+  vim.opt.foldexpr = "v:lua.require'otsu-ui.statuscolumn'.foldexpr()"
 end
 
 function M.get_signs(buf, lnum)

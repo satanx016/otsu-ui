@@ -1,5 +1,5 @@
 local sep_style = Otsuvim.config.ui.statusline.separator_style
-local utils = require("otsu-ui.otsuline.utils")
+local utils = require("otsu-ui.statusline.utils")
 
 local default_sep_icons = {
   default = { left = "", right = "" },

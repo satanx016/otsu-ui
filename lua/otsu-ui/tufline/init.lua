@@ -3,13 +3,13 @@ local cur_buf = vim.api.nvim_get_current_buf
 local set_buf = vim.api.nvim_set_current_buf
 
 function M.lazyload()
-  if Otsuvim.config.ui.tabufline.enabled then
-    require("otsu-ui.otsutab.lazyload")
+  if Otsuvim.config.ui.tufline.enabled then
+    require("otsu-ui.tufline.lazyload")
   end
 end
 
 function M.load()
-  vim.opt.tabline = "%!v:lua.require('otsu-ui.otsutab.modules')()"
+  vim.opt.tabline = "%!v:lua.require('otsu-ui.tufline.modules')()"
 end
 
 local function buf_index(bufnr)
@@ -48,7 +48,7 @@ M.close_buffer = function(bufnr)
   if vim.bo.buftype == "terminal" then
     vim.cmd(vim.bo.buflisted and "set nobl | enew" or "hide")
   else
-    -- for those who have disabled tabufline
+    -- for those who have disabled tufline
     if not vim.t.bufs then
       vim.cmd("bd")
       return

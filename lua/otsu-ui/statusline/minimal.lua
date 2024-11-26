@@ -1,5 +1,5 @@
 local sep_style = Otsuvim.config.ui.statusline.separator_style
-local utils = require("otsu-ui.otsuline.utils")
+local utils = require("otsu-ui.statusline.utils")
 
 sep_style = (sep_style ~= "round" and sep_style ~= "block") and "block" or sep_style
 
