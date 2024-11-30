@@ -61,10 +61,11 @@ local function create(term)
   vim.keymap.set("n", "<Esc>", function() vim.api.nvim_win_close(term.win, true) end, { buffer = term.buf, desc = "Terminal Close" })
   vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { buffer = term.buf, desc = "Terminal Unfocus" })
   vim.api.nvim_create_autocmd("TermClose", {
-    group = vim.api.nvim_create_augroup("otsu-ui_term_close", {}),
     buffer = term.buf,
     callback = function()
+      M.terms[tostring(term.buf)] = nil
       vim.api.nvim_win_close(term.win, true)
+      vim.api.nvim_buf_delete(term.buf, { force = true })
     end,
   })
 
