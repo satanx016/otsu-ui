@@ -37,7 +37,7 @@ local function term_get_by_type(type)
 end
 
 local function draw(term)
-  local win_opts = vim.tbl_deep_extend("force", defaults[term.type], config.ui.term[term.type])
+  local win_opts = vim.tbl_deep_extend("force", defaults[term.type], config.ui.term[term.type] or {})
 
   if term.type == "float" then
     win_opts.width = math.ceil(vim.o.columns * win_opts.width)
