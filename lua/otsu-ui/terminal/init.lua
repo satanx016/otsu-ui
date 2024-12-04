@@ -6,7 +6,7 @@ M.terms = {}
 
 local defaults = {
   float = {
-    title = "Terminal",
+    title = "  Terminal ",
     title_pos = "center",
     relative = "editor",
     border = "rounded",
