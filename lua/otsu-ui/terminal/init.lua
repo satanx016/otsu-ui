@@ -6,7 +6,6 @@ M.terms = {}
 
 local defaults = {
   float = {
-    style = "minimal",
     title = "Terminal",
     title_pos = "center",
     relative = "editor",
@@ -16,13 +15,11 @@ local defaults = {
   },
 
   hsplit = {
-    style = "minimal",
     vertical = false,
     height = 0.3,
   },
 
   vsplit = {
-    style = "minimal",
     vertical = true,
     width = 0.3,
   },
@@ -51,6 +48,10 @@ local function draw(term)
   end
 
   term.win = vim.api.nvim_open_win(term.buf, true, win_opts)
+  vim.wo[term.win].relativenumber = false
+  vim.wo[term.win].number = false
+  vim.wo[term.win].statuscolumn = ""
+
   vim.cmd("startinsert")
 end
 
