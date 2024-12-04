@@ -66,8 +66,10 @@ local function create(term)
     buffer = term.buf,
     callback = function()
       M.terms[tostring(term.buf)] = nil
-      vim.api.nvim_win_close(term.win, true)
-      vim.api.nvim_buf_delete(term.buf, { force = true })
+      if not (vim.fn.bufwinid(term.buf) == -1) then
+        vim.api.nvim_win_close(term.win, true)
+        vim.api.nvim_buf_delete(term.buf, { force = true, unload = true })
+      end
     end,
   })
 
