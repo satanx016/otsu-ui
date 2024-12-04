@@ -57,6 +57,7 @@ end
 
 local function create(term)
   term.buf = vim.api.nvim_create_buf(false, true)
+  vim.bo[term.buf].ft = "toggleterm"
 
   -- stylua: ignore
   vim.keymap.set("n", "<Esc>", function() vim.api.nvim_win_close(term.win, true) end, { buffer = term.buf, desc = "Terminal Close" })
