@@ -48,9 +48,9 @@ local function draw(term)
   end
 
   term.win = vim.api.nvim_open_win(term.buf, true, win_opts)
-  vim.wo[term.win].relativenumber = false
-  vim.wo[term.win].number = false
-  vim.wo[term.win].statuscolumn = ""
+  vim.opt_local.relativenumber = false
+  vim.opt_local.number = false
+  vim.opt_local.statuscolumn = nil
 
   vim.cmd("startinsert")
 end
