@@ -1,9 +1,11 @@
-local function augroup(name)
+local M = {}
+
+function M.augroup(name)
   return vim.api.nvim_create_augroup("otsu-ui_" .. name, {})
 end
 
 vim.api.nvim_create_autocmd("BufWritePost", {
-  group = augroup("reload"),
+  group = M.augroup("reload"),
   pattern = vim.uv.fs_realpath(vim.fn.stdpath("config") .. "/lua/otsuvim/config/otsurc.lua"),
   callback = function()
     require("plenary.reload").reload_module("otsuvim.config.otsurc")
@@ -17,7 +19,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
-  group = augroup("vsplit_help&man"),
+  group = M.augroup("vsplit_help&man"),
   pattern = { "*.txt", "*(*)", "*.norg" },
   callback = function()
     if vim.bo.buftype == "help" or vim.bo.filetype == "man" then
@@ -27,8 +29,10 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
+  group = M.augroup("highlight_yank"),
   callback = function()
     vim.highlight.on_yank({ higroup = "MatchWord" })
   end,
 })
+
+return M
