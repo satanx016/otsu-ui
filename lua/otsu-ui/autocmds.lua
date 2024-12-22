@@ -1,7 +1,7 @@
 local M = {}
 
-function M.augroup(name)
-  vim.api.nvim_create_augroup("otsu-ui_" .. name, {})
+function M.augroup(name, opts)
+  vim.api.nvim_create_augroup("otsu-ui_" .. name, opts or {})
   return "otsu-ui_" .. name
 end
 
