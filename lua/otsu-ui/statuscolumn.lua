@@ -1,7 +1,7 @@
 local M = {}
 
 function M.load()
-  vim.opt.statuscolumn = [[%!v:lua.require'otsu-ui.statuscolumn'.statuscolumn()]]
+  vim.opt.statuscolumn = "%!v:lua.require('otsu-ui.statuscolumn').statuscolumn()"
 
   vim.opt.foldmethod = "expr"
   vim.opt.foldtext = ""
