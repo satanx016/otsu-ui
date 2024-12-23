@@ -80,7 +80,7 @@ if opts.lazyload then
       if #vim.fn.getbufinfo({ buflisted = 1 }) >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
         vim.opt.showtabline = 2
         vim.opt.tabline = "%!v:lua.require('otsu-ui.tufline.modules')()"
-        vim.api.nvim_del_augroup_by_name("ostu-ui_tufline_lazyload")
+        vim.api.nvim_del_augroup_by_name(augroup("tufline_lazyload"))
       end
     end,
   })
