@@ -1,6 +1,7 @@
 local opts = Otsuvim.config.ui.tufline
 local buf_opt = vim.api.nvim_get_option_value
 local cur_buf = vim.api.nvim_get_current_buf
+local augroup = require("otsu-ui.autocmds").augroup
 
 -- store listed buffers in tab local var
 vim.t.bufs = vim.api.nvim_list_bufs()
@@ -16,7 +17,7 @@ end
 vim.t.bufs = listed_bufs
 
 vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
-  group = vim.api.nvim_create_augroup("ostu-ui_tufline_bufadd", {}),
+  group = augroup("tufline_bufadd"),
   callback = function(args)
     local bufs = vim.t.bufs
     local is_curbuf = cur_buf() == args.buf
@@ -54,7 +55,7 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
 })
 
 vim.api.nvim_create_autocmd("BufDelete", {
-  group = vim.api.nvim_create_augroup("ostu-ui_tufline_bufremove", {}),
+  group = augroup("tufline_bufremove"),
   callback = function(args)
     for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
       local bufs = vim.t[tab].bufs
@@ -74,7 +75,7 @@ vim.api.nvim_create_autocmd("BufDelete", {
 if opts.lazyload then
   vim.api.nvim_create_autocmd({ "BufNew", "BufNewFile", "BufRead", "TabEnter", "TermOpen" }, {
     pattern = "*",
-    group = vim.api.nvim_create_augroup("ostu-ui_tufline_lazyload", {}),
+    group = augroup("tufline_lazyload"),
     callback = function()
       if #vim.fn.getbufinfo({ buflisted = 1 }) >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
         vim.opt.showtabline = 2
@@ -89,7 +90,7 @@ else
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("otsu-ui_tufline_qf", {}),
+  group = augroup("tufline_qf"),
   pattern = "qf",
   callback = function()
     vim.opt_local.buflisted = false
