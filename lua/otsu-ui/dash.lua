@@ -1,13 +1,13 @@
 dofile(vim.g.based_cache .. "dash")
 
-local dash = { tui = {} }
+local dash = {}
 local config = Otsuvim.config.ui.dash
 local augroup = require("otsu-ui.autocmds").augroup("dash")
 local ns = vim.api.nvim_create_namespace("otsu-dash")
 local win, buf
 
 function dash.open()
-  buf, win = vim.api.nvim_create_buf(false, true), vim.api.nvim_get_current_win()
+  dash.tui, win, buf = {}, vim.api.nvim_get_current_win(), vim.api.nvim_create_buf(false, true)
   vim.api.nvim_win_set_buf(win, buf)
   dash.load_opts()
 
