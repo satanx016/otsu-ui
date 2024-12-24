@@ -15,6 +15,7 @@ function M.setup()
   if config.ui.dash.load_on_startup then
     require("otsu-ui.dash").open()
   end
+  vim.api.nvim_create_user_command("Dash", require("otsu-ui.dash").open, {})
 
   require("otsu-ui.autocmds")
 end
