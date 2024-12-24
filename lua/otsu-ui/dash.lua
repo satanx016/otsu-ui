@@ -47,6 +47,10 @@ function dash.open()
 
   dash.draw()
 
+  for _, item in pairs(config.buttons) do
+    vim.keymap.set("n", item.key, "<cmd>" .. item.action .. "<cr>", { buffer = buf, desc = "dash action" })
+  end
+
   vim.api.nvim_create_autocmd({ "WinResized", "VimResized" }, {
     group = augroup,
     buffer = buf,
