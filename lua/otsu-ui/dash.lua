@@ -68,7 +68,7 @@ function dash.open()
     end,
   })
 
-  vim.api.nvim_create_autocmd("BufWipeout", {
+  vim.api.nvim_create_autocmd({ "BufDelete", "BufWipeout" }, {
     group = augroup,
     buffer = dash.buf,
     callback = function()
@@ -110,8 +110,6 @@ end
 
 local saved_opts = {}
 local opts = {
-  showtabline = 0,
-  laststatus = 0,
   bufhidden = "wipe",
   colorcolumn = "",
   foldcolumn = "0",
@@ -132,11 +130,19 @@ function dash.load_opts(restore)
     for opt in pairs(opts) do
       vim.opt_local[opt] = saved_opts[opt]
     end
+
+    vim.opt.showtabline = saved_opts["showtabline"]
+    vim.opt.laststatus = saved_opts["laststatus"]
   else
     for opt, val in pairs(opts) do
       saved_opts[opt] = vim.opt_local[opt]:get()
       vim.opt_local[opt] = val
     end
+
+    saved_opts["showtabline"] = vim.opt.showtabline:get()
+    saved_opts["laststatus"] = vim.opt.laststatus:get()
+    vim.opt.showtabline = 0
+    vim.opt.laststatus = 0
   end
 end
 
