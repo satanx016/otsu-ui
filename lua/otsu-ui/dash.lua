@@ -1,3 +1,5 @@
+dofile(vim.g.based_cache .. "dash")
+
 local M = {}
 local config = Otsuvim.config.ui.dash
 local augroup = require("otsu-ui.autocmds").augroup("dash")
