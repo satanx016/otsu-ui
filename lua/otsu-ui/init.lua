@@ -12,6 +12,10 @@ function M.setup()
 
   require("otsu-ui.statuscolumn").load()
 
+  if config.ui.dash.load_on_startup then
+    require("otsu-ui.dash").open()
+  end
+
   require("otsu-ui.autocmds")
 end
 
