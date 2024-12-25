@@ -4,6 +4,7 @@ local dash = {}
 local config = Otsuvim.config.ui.dash
 local utils = require("otsu-ui.utils")
 local ns = vim.api.nvim_create_namespace("otsu-dash")
+local redraw_debounce = nil
 local btn_size = 40
 
 function dash.open()
@@ -59,7 +60,17 @@ function dash.open()
     group = augroup,
     buffer = dash.buf,
     callback = function()
-      dash.draw()
+      if redraw_debounce then
+        vim.fn.timer_stop(redraw_debounce)
+      end
+
+      redraw_debounce = vim.fn.timer_start(100, function()
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(dash.buf) then
+            dash.draw()
+          end
+        end)
+      end)
     end,
   })
 
