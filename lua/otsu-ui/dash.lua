@@ -7,16 +7,13 @@ local ns = vim.api.nvim_create_namespace("otsu-dash")
 local btn_size = 40
 
 function dash.open()
-  local cur_win = vim.api.nvim_get_current_win()
-  if not dash.buf then
-    dash.tui = {}
-    dash.win = cur_win
-    dash.buf = vim.api.nvim_create_buf(false, true)
-  else
-    vim.api.nvim_win_set_buf(cur_win, dash.buf)
+  if dash.buf then
     return
   end
 
+  dash.tui = {}
+  dash.win = vim.api.nvim_get_current_win()
+  dash.buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_win_set_buf(dash.win, dash.buf)
   dash.load_opts()
 
@@ -104,7 +101,7 @@ function dash.open()
     buffer = dash.buf,
     callback = function()
       local cur_row = math.max(math.min(vim.fn.line("."), btn_list_max), btn_list_min)
-      local cur_col = math.max(math.floor(vim.api.nvim_win_get_width(cur_win) / 2 - (btn_size + 4) / 2), 0) + 3
+      local cur_col = math.max(math.floor(vim.api.nvim_win_get_width(dash.win) / 2 - (btn_size + 4) / 2), 0) + 3
       vim.api.nvim_win_set_cursor(dash.win, { cur_row, cur_col })
     end,
   })
