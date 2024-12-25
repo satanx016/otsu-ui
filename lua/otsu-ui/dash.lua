@@ -149,41 +149,48 @@ function dash.draw()
   end
 end
 
-local saved_opts = {}
+local saved_opts = { ["local"] = {}, global = {} }
 local opts = {
-  bufhidden = "wipe",
-  colorcolumn = "",
-  foldcolumn = "0",
-  matchpairs = "",
-  cursorcolumn = false,
-  cursorline = false,
-  list = false,
-  number = false,
-  relativenumber = false,
-  spell = false,
-  swapfile = false,
-  readonly = false,
-  filetype = "dash",
-  signcolumn = "no",
+  ["local"] = {
+    bufhidden = "wipe",
+    colorcolumn = "",
+    foldcolumn = "0",
+    matchpairs = "",
+    cursorcolumn = false,
+    cursorline = false,
+    list = false,
+    number = false,
+    relativenumber = false,
+    spell = false,
+    swapfile = false,
+    readonly = false,
+    filetype = "dash",
+    signcolumn = "no",
+  },
+  global = {
+    showtabline = 0,
+    laststatus = 0,
+  },
 }
 function dash.load_opts(restore)
   if restore then
-    for opt in pairs(opts) do
-      vim.opt_local[opt] = saved_opts[opt]
+    for opt in pairs(opts["local"]) do
+      vim.opt_local[opt] = saved_opts["local"][opt]
     end
 
-    vim.opt.showtabline = saved_opts["showtabline"]
-    vim.opt.laststatus = saved_opts["laststatus"]
+    for opt in pairs(opts.global) do
+      vim.opt[opt] = saved_opts.global[opt]
+    end
   else
-    for opt, val in pairs(opts) do
-      saved_opts[opt] = vim.opt_local[opt]:get()
+    for opt, val in pairs(opts["local"]) do
+      saved_opts["local"][opt] = vim.opt_local[opt]:get()
       vim.opt_local[opt] = val
     end
 
-    saved_opts["showtabline"] = vim.opt.showtabline:get()
-    saved_opts["laststatus"] = vim.opt.laststatus:get()
-    vim.opt.showtabline = 0
-    vim.opt.laststatus = 0
+    for opt, val in pairs(opts.global) do
+      saved_opts.global[opt] = vim.opt_local[opt]:get()
+      vim.opt[opt] = val
+    end
   end
 end
 
