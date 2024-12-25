@@ -103,14 +103,13 @@ function dash.open()
   vim.api.nvim_create_autocmd("CursorMoved", {
     buffer = dash.buf,
     callback = function()
-      local cur_pos = vim.fn.line(".")
-      local col = math.floor(vim.api.nvim_win_get_width(cur_win) / 2 - btn_size / 2 + 1)
-      if cur_pos < btn_list_min then
-        vim.api.nvim_win_set_cursor(dash.win, { btn_list_min, col })
-      elseif btn_list_max < cur_pos then
-        vim.api.nvim_win_set_cursor(dash.win, { btn_list_max, col })
+      local cur_pos = { vim.fn.line("."), math.floor(vim.api.nvim_win_get_width(cur_win) / 2 - btn_size / 2 + 1) }
+      if cur_pos[1] < btn_list_min then
+        vim.api.nvim_win_set_cursor(dash.win, { btn_list_min, cur_pos[2] })
+      elseif btn_list_max < cur_pos[1] then
+        vim.api.nvim_win_set_cursor(dash.win, { btn_list_max, cur_pos[2] })
       else
-        vim.api.nvim_win_set_cursor(dash.win, { cur_pos, col })
+        vim.api.nvim_win_set_cursor(dash.win, cur_pos)
       end
     end,
   })
