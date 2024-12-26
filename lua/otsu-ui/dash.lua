@@ -9,6 +9,30 @@ local render_debounce = nil
 local btn_locations = {}
 local btn_width = 40
 
+local saved_opts = { global = {}, _local = {} } -- user options
+local opts = {
+  global = {
+    showtabline = 0,
+    laststatus = 0,
+  },
+  _local = {
+    bufhidden = "wipe",
+    colorcolumn = "",
+    foldcolumn = "0",
+    matchpairs = "",
+    cursorcolumn = false,
+    cursorline = false,
+    list = false,
+    number = false,
+    relativenumber = false,
+    spell = false,
+    swapfile = false,
+    readonly = false,
+    filetype = "dash",
+    signcolumn = "no",
+  },
+}
+
 function dash.open()
   if dash.buf then -- prevent double instances
     return
@@ -73,9 +97,12 @@ function dash.events()
     group = augroup,
     buffer = dash.buf,
     callback = function()
+      dash.load_opts(true) -- restore user options
+
+      -- clean/free mem
       vim.api.nvim_del_augroup_by_name(augroup)
-      dash.load_opts(true)
       dash.win, dash.buf = nil, nil
+      saved_opts._local, saved_opts.global = {}, {}
     end,
   })
 
@@ -165,29 +192,6 @@ function dash.render()
   end
 end
 
-local saved_opts = { global = {}, _local = {} }
-local opts = {
-  global = {
-    showtabline = 0,
-    laststatus = 0,
-  },
-  _local = {
-    bufhidden = "wipe",
-    colorcolumn = "",
-    foldcolumn = "0",
-    matchpairs = "",
-    cursorcolumn = false,
-    cursorline = false,
-    list = false,
-    number = false,
-    relativenumber = false,
-    spell = false,
-    swapfile = false,
-    readonly = false,
-    filetype = "dash",
-    signcolumn = "no",
-  },
-}
 function dash.load_opts(restore)
   if restore then -- restore the user options
     for opt in pairs(opts.global) do
