@@ -14,7 +14,6 @@ function dash.open()
     return
   end
 
-  dash.tui = {}
   dash.win = vim.api.nvim_get_current_win()
   dash.buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_win_set_buf(dash.win, dash.buf)
@@ -26,33 +25,41 @@ function dash.open()
     end
   end
 
-  -- Header
-  hsp(4)
-  for _, txt in pairs(config.header) do
-    table.insert(dash.tui, { { txt = txt, hl = "DashHeader" } })
-  end
-  -- Buttons
-  hsp(2)
-  for _, item in pairs(config.buttons) do
-    hsp(1)
+  local next = next -- local keyword for faster runtime
+  if not dash.tui or next(dash.tui) == nil then -- try to skip populating if cached
+    dash.tui = {}
+
+    -- Header
+    hsp(4)
+    for _, txt in pairs(config.header) do
+      table.insert(dash.tui, { { txt = txt, hl = "DashHeader" } })
+    end
+    -- Buttons
+    hsp(2)
+    for _, item in pairs(config.buttons) do
+      hsp(1)
+      table.insert(dash.tui, {
+        {
+          txt = item.icon .. " " .. item.txt .. string.rep(" ", (btn_width - string.len(item.txt))),
+          hl = "DashBtnTxt",
+        },
+        { txt = item.key, hl = "DashBtnKey" },
+      })
+    end
+    -- Footer
+    hsp(3)
+    local lazy_stats = function()
+      local stats = require("lazy").stats()
+      local ms = math.floor(stats.startuptime)
+      return stats.loaded, stats.count, ms
+    end
     table.insert(dash.tui, {
-      { txt = item.icon .. " " .. item.txt .. string.rep(" ", (btn_width - string.len(item.txt))), hl = "DashBtnTxt" },
-      { txt = item.key, hl = "DashBtnKey" },
+      {
+        txt = ("  Otsuvim loaded %s / %s plugins in %sms"):format(lazy_stats()),
+        hl = "DashFooter",
+      },
     })
   end
-  -- Footer
-  hsp(3)
-  local lazy_stats = function()
-    local stats = require("lazy").stats()
-    local ms = math.floor(stats.startuptime)
-    return stats.loaded, stats.count, ms
-  end
-  table.insert(dash.tui, {
-    {
-      txt = ("  Otsuvim loaded %s / %s plugins in %sms"):format(lazy_stats()),
-      hl = "DashFooter",
-    },
-  })
 
   dash.render() -- fire the first render
   dash.events() -- load autocommands
