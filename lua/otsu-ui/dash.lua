@@ -40,7 +40,7 @@ function dash.open()
       { txt = item.key, hl = "DashBtnKey" },
     })
   end
-  -- Booter
+  -- Footer
   hsp(3)
   local footer_txt = function()
     local stats = require("lazy").stats()
