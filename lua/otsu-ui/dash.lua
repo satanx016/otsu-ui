@@ -42,14 +42,14 @@ function dash.open()
   end
   -- Footer
   hsp(3)
-  local footer_txt = function()
+  local lazy_stats = function()
     local stats = require("lazy").stats()
     local ms = math.floor(stats.startuptime)
-    return "  Otsuvim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms"
+    return stats.loaded, stats.count, ms
   end
   table.insert(dash.tui, {
     {
-      txt = footer_txt(),
+      txt = ("  Otsuvim loaded %s / %s plugins in %sms"):format(lazy_stats()),
       hl = "DashFooter",
     },
   })
