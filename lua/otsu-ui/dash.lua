@@ -52,7 +52,7 @@ function dash.open()
 
   local next = next -- local keyword for faster runtime
   if not dash.tui or next(dash.tui) == nil then -- try to skip populating if cached
-    dash.tui = {}
+    dash.empty_buf, dash.tui = {}, {}
 
     -- Header
     hsp(4)
@@ -84,6 +84,10 @@ function dash.open()
         hl = "DashFooter",
       },
     })
+
+    for i = 1, #dash.tui + 1 do
+      dash.empty_buf[i] = string.rep(" ", 333) -- tempted to use 666 but that probably cost perf
+    end
   end
 
   dash.render() -- fire the first render
@@ -164,13 +168,10 @@ function dash.keybinds()
 end
 
 function dash.render()
-  local empty_buf, winw = {}, vim.api.nvim_win_get_width(dash.win)
-  for i = 1, #dash.tui + 1 do
-    empty_buf[i] = string.rep(" ", winw)
-  end
+  local winw = vim.api.nvim_win_get_width(dash.win)
 
   vim.bo[dash.buf].ma = true
-  vim.api.nvim_buf_set_lines(dash.buf, 0, -1, false, empty_buf)
+  vim.api.nvim_buf_set_lines(dash.buf, 0, -1, false, dash.empty_buf)
   vim.bo[dash.buf].ma = false
 
   -- write/center/highlight dash elements
