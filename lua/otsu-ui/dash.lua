@@ -163,8 +163,8 @@ function dash.keybinds()
 end
 
 function dash.render()
-  local empty_buf, winh, winw = {}, vim.api.nvim_win_get_height(dash.win), vim.api.nvim_win_get_width(dash.win)
-  for i = 1, #dash.tui > winh and #dash.tui + 10 or winh do
+  local empty_buf, winw = {}, vim.api.nvim_win_get_width(dash.win)
+  for i = 1, #dash.tui + 1 do
     empty_buf[i] = string.rep(" ", winw)
   end
 
