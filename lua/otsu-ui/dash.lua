@@ -35,6 +35,7 @@ local opts = {
 
 function dash.open()
   if dash.buf then -- prevent double instances
+    vim.api.nvim_set_current_win(dash.win)
     return
   end
 
