@@ -12,10 +12,12 @@ function M.setup()
 
   require("otsu-ui.statuscolumn").load()
 
-  if config.ui.dash.load_on_startup and not (vim.fn.argc(-1) > 0) then
-    require("otsu-ui.dash").open()
+  if config.ui.dash.enabled then
+    if config.ui.dash.load_on_startup and not (vim.fn.argc(-1) > 0) then
+      require("otsu-ui.dash").open()
+    end
+    vim.api.nvim_create_user_command("Dash", require("otsu-ui.dash").open, {})
   end
-  vim.api.nvim_create_user_command("Dash", require("otsu-ui.dash").open, {})
 
   require("otsu-ui.autocmds")
 end
