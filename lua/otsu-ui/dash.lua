@@ -33,6 +33,12 @@ local opts = {
   },
 }
 
+local lazy_stats = function()
+  local stats = require("lazy").stats()
+  local ms = math.floor(stats.startuptime)
+  return stats.loaded, stats.count, ms
+end
+
 function dash.open()
   if dash.buf then -- prevent double instances
     vim.api.nvim_set_current_win(dash.win)
@@ -78,11 +84,6 @@ function dash.open()
     end
     -- Footer
     hsp(3)
-    local lazy_stats = function()
-      local stats = require("lazy").stats()
-      local ms = math.floor(stats.startuptime)
-      return stats.loaded, stats.count, ms
-    end
     table.insert(dash.tui, {
       {
         txt = ("  Otsuvim loaded %s / %s plugins in %sms"):format(lazy_stats()),
