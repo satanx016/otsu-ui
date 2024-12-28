@@ -1,6 +1,6 @@
 local dash = {}
 
-local config = Otsuvim.config.ui.dash
+local config
 local utils = require("otsu-ui.utils")
 dofile(vim.g.based_cache .. "dash")
 
@@ -48,6 +48,11 @@ function dash.open()
     for _ = 1, n or 1 do
       table.insert(dash.tui, { { txt = " " } })
     end
+  end
+
+  if config ~= Otsuvim.config.ui.dash then -- Reload config if changed and update tui
+    config = Otsuvim.config.ui.dash
+    dash.tui = nil
   end
 
   local next = next -- local keyword for faster runtime
