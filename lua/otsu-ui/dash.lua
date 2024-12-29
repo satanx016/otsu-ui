@@ -41,7 +41,11 @@ end
 
 function dash.open()
   if dash.buf then -- prevent double instances
-    vim.api.nvim_set_current_win(dash.win)
+    if dash.win == vim.api.nvim_get_current_win() then
+      vim.api.nvim_buf_delete(dash.buf, { force = true })
+    else
+      vim.api.nvim_set_current_win(dash.win)
+    end
     return
   end
 
