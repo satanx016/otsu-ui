@@ -207,7 +207,9 @@ end
 function dash.load_opts(restore)
   if restore then -- restore the user options
     for opt in pairs(opts.global) do
-      vim.opt[opt] = saved_opts.global[opt]
+      if vim.opt[opt]:get() == opts.global[opt] then -- prevent altering new vim.opt change
+        vim.opt[opt] = saved_opts.global[opt]
+      end
     end
 
     for opt in pairs(opts._local) do
