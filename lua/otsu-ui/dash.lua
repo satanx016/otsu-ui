@@ -129,13 +129,14 @@ function dash.events()
         vim.fn.timer_stop(render_debounce)
       end
 
-      render_debounce = vim.fn.timer_start(100, function()
-        vim.schedule(function() -- safely render on the main thread
+      render_debounce = vim.fn.timer_start(
+        100,
+        vim.schedule_wrap(function() -- safely render on the main thread
           if vim.api.nvim_buf_is_valid(dash.buf) then
             dash.render()
           end
         end)
-      end)
+      )
     end,
   })
 
