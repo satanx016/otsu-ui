@@ -28,7 +28,7 @@ local opts = {
     spell = false,
     swapfile = false,
     readonly = false,
-    filetype = "dash",
+    filetype = "dashboard",
     signcolumn = "no",
   },
 }
